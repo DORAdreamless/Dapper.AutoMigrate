@@ -53,7 +53,7 @@ namespace Dapper.AutoMigrate
                 if (property.IsDefined(typeof(ColumnAttribute)))
                 {
                     PropertyMapper propertyMapper = Engine.GetPropertyMapper(entityMapper, property);
-                    entityMapper.Fields.Add(propertyMapper);
+                    entityMapper.PropertyMappers.Add(propertyMapper);
                 }
 
             }
@@ -74,7 +74,7 @@ namespace Dapper.AutoMigrate
 
         public static EntityMapper GetEntityMapper(Type entityMapperType)
         {
-            return new MysqlEntityMapper(entityMapperType);
+            return new MySqlEntityMapper(entityMapperType);
         }
 
         public static PropertyMapper GetPropertyMapper(EntityMapper entityMapper, PropertyInfo property)

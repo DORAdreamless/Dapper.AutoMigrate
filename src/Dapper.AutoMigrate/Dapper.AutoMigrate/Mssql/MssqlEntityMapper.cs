@@ -2,9 +2,9 @@
 
 namespace Dapper.AutoMigrate.Mysql
 {
-    public class MssqlEntityMapper : EntityMapper
+    public class MsSqlEntityMapper : EntityMapper
     {
-        public MssqlEntityMapper(Type entityMapperType) : base(entityMapperType)
+        public MsSqlEntityMapper(Type entityMapperType) : base(entityMapperType)
         {
         }
 

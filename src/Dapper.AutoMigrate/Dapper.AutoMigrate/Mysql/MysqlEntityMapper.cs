@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Dapper.AutoMigrate.Mysql
 {
-    public class MysqlEntityMapper : EntityMapper
+    public class MySqlEntityMapper : EntityMapper
     {
-        public MysqlEntityMapper(Type entityMapperType) : base(entityMapperType)
+        public MySqlEntityMapper(Type entityMapperType) : base(entityMapperType)
         {
         }
 
@@ -22,12 +22,14 @@ namespace Dapper.AutoMigrate.Mysql
             StringBuilder builder = new StringBuilder();
             List<string> propertyScript = new List<string>();
             builder.Append("CREATE TABLE ").Append(this.NamePrefix).Append(this.TableName).Append(this.NameSuffix).Append("(").AppendLine();
-            this.Fields.ForEach(propertyMapper =>
+            this.PropertyMappers.ForEach(propertyMapper =>
             {
                 propertyScript.Add(propertyMapper.GetCreateColumnSQL());
             });
             propertyScript.Add(this.GetPrimarySQL());
+            propertyScript.AddRange(this.GetCreateTableIndexSQL());
             builder.Append(string.Join(",\n", propertyScript));
+            builder.AppendLine();
             builder.Append(")");
             builder.Append(" ENGINE=").Append(this.Engine)
             .Append(" DEFAULT CHARSET=").Append(this.Charset)
@@ -39,15 +41,29 @@ namespace Dapper.AutoMigrate.Mysql
         public override string GetPrimarySQL()
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append("PRIMARY KEY(");
-            List<PropertyMapper> primaryKeyFields = this.Fields.Where(item => item.ParmaryKey).ToList();
+            builder.Append(" PRIMARY KEY(");
+            List<PropertyMapper> primaryKeyFields = this.PropertyMappers.Where(item => item.ParmaryKey).ToList();
             List<string> prumaryKeyColumns = primaryKeyFields.Select(item => item.EntityMapper.NamePrefix + item.ColumnName + item.EntityMapper.NameSuffix).ToList();
             builder.Append(string.Join(",", prumaryKeyColumns));
             builder.Append(")");
             return builder.ToString();
         }
 
-
+        private string[] GetCreateTableIndexSQL()
+        {
+            var idxProperties = this.PropertyMappers.Where(item => item.Index).ToList();
+            string[] idxSqls = new string[idxProperties.Count()];
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < idxProperties.Count(); i++)
+            {
+                var idx = idxProperties[i];
+                builder.Append(" KEY");
+                builder.Append(" ").Append(this.NamePrefix).AppendFormat("idx_{0}_{1}", this.TableName, idx.ColumnName).Append(this.NameSuffix);
+                builder.Append(" (").Append(this.NamePrefix).Append(idx.ColumnName).Append(this.NameSuffix).Append(")");
+                idxSqls[i] = builder.ToString();
+            }
+            return idxSqls;
+        }
 
         public override bool IsTableExist()
         {

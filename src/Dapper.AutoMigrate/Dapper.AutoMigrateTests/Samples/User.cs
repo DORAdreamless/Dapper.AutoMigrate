@@ -22,7 +22,7 @@ namespace Dapper.AutoMigrate.Tests.Samples
         [Column()]
         public string HeadImageUrl { get; set; }
         [Column()]
-        public DateTime? Birthday { get; set; }
+        public DateTime Birthday { get; set; }
         [Column()]
         public string Phone { get; set; }
         [Column()]

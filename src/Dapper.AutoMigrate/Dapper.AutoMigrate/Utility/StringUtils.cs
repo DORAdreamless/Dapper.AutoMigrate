@@ -7,22 +7,24 @@ namespace Dapper.AutoMigrate.Utility
         public static  string GetSnackName(string text)
         {
             StringBuilder builder = new StringBuilder();
+            int counter = 0;
             foreach (char c in text)
             {
                 if (char.IsWhiteSpace(c))
                 {
                     continue;
                 }
-                if (char.IsUpper(c))
+                if (counter > 0)
                 {
-                    builder.Append("_");
+                    if (char.IsUpper(c))
+                    {
+                        builder.Append("_");
+                    }
                 }
-                else
-                {
-                    builder.Append(c);
-                }
+                builder.Append(c);
+                counter++;
             }
-            return builder.ToString();
+            return builder.ToString().ToLower();
         }
     }
 

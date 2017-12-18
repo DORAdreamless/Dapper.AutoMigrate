@@ -3,9 +3,9 @@ using System.Reflection;
 
 namespace Dapper.AutoMigrate.Mysql
 {
-    public class MssqlPropertyMapper : PropertyMapper
+    public class MsSqlPropertyMapper : PropertyMapper
     {
-        public MssqlPropertyMapper(EntityMapper entityMapper, PropertyInfo property) : base(entityMapper, property)
+        public MsSqlPropertyMapper(EntityMapper entityMapper, PropertyInfo property) : base(entityMapper, property)
         {
         }
 
@@ -15,6 +15,11 @@ namespace Dapper.AutoMigrate.Mysql
         }
 
         public override string GetCreateColumnSQL()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string GetDataType()
         {
             throw new NotImplementedException();
         }

@@ -60,7 +60,7 @@ namespace Dapper.AutoMigrate
         [Column()]
         public DateTime UpdatedAt { get; set; }
         [Column()]
-        public DateTime? DeletedAt { get; set; }
+        public DateTime DeletedAt { get; set; }
     }
 
    

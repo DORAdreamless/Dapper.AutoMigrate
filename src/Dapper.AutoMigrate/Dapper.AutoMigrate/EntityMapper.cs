@@ -14,7 +14,7 @@ namespace Dapper.AutoMigrate
 
         public string Schema { get; set; }
 
-        public List<PropertyMapper> Fields { get; set; }
+        public List<PropertyMapper> PropertyMappers { get; }
 
         public PropertyInfo[] Properties { get; set; }
 
@@ -34,15 +34,14 @@ namespace Dapper.AutoMigrate
 
         public virtual string Collate => "utf8_bin";
 
-        public EntityMapper()
-        {
-            this.Fields = new List<PropertyMapper>();
-        }
+
 
         public abstract string GetPrimarySQL();
 
         public EntityMapper(Type entityMapperType)
         {
+            this.PropertyMappers = new List<PropertyMapper>();
+
             TableAttribute tableAttribute = entityMapperType.GetCustomAttribute<TableAttribute>();
             this.TableName = tableAttribute.TableName;
             if (string.IsNullOrWhiteSpace(this.TableName))

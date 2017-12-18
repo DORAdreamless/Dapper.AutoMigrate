@@ -21,9 +21,10 @@ namespace Dapper.AutoMigrate
             {
                 this.ColumnName = StringUtils.GetSnackName(property.Name);
             }
-            this.Type = columnAttribute.Type;
-            if (string.IsNullOrWhiteSpace(this.Type))
+            this.DbType = columnAttribute.Type;
+            if (string.IsNullOrWhiteSpace(this.DbType))
             {
+                this.DbType = this.GetDataType();
                 //自动映射
             }
             this.Unique = columnAttribute.Unique;
@@ -34,13 +35,20 @@ namespace Dapper.AutoMigrate
             {
                 this.ColumnDescription = property.GetCustomAttribute<DescriptionAttribute>().Description;
             }
+            if (property.IsDefined(typeof(PrimaryKeyAttribute)))
+            {
+                this.ParmaryKey = true;
+                this.Auto =   property.GetCustomAttribute<PrimaryKeyAttribute>().Auto;
+            }
+
+            
         }
 
         public string ColumnName { get; set; }
 
         public string ColumnDescription { get; set; }
 
-        public string Type { get; set; }
+        public string DbType { get; set; }
 
         public bool Unique { get; set; }
 
@@ -52,12 +60,15 @@ namespace Dapper.AutoMigrate
         public bool NotNull { get; set; }
 
         public Type PropertyType { get; set; }
-        public bool ParmaryKey { get; internal set; }
+        public bool ParmaryKey { get;  set; }
+        public bool Auto { get;  set; }
 
         public abstract string GetCreateColumnSQL();
 
         public abstract string GetAlterColumnSQL();
 
         public abstract string GetDropColumnSQL();
+
+        public abstract string GetDataType();
     }
 }
