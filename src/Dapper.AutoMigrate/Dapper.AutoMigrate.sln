@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapper.AutoMigrate", "Dappe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapper.AutoMigrateTests", "Dapper.AutoMigrateTests\Dapper.AutoMigrateTests.csproj", "{FC92A600-684C-498E-8A94-36C6FE3A6B62}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{A929D401-561F-42C9-95B4-843F03B09111}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{FC92A600-684C-498E-8A94-36C6FE3A6B62}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC92A600-684C-498E-8A94-36C6FE3A6B62}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC92A600-684C-498E-8A94-36C6FE3A6B62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A929D401-561F-42C9-95B4-843F03B09111}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A929D401-561F-42C9-95B4-843F03B09111}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A929D401-561F-42C9-95B4-843F03B09111}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A929D401-561F-42C9-95B4-843F03B09111}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

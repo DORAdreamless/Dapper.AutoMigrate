@@ -2,7 +2,9 @@
 using Dapper.AutoMigrate.Utility;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
+using System.Text;
 
 namespace Dapper.AutoMigrate
 {
@@ -37,6 +39,26 @@ namespace Dapper.AutoMigrate
 
 
         public abstract string GetPrimarySQL();
+
+        public  string GetSyncScripts(StreamWriter streamWriter)
+        {
+            StringBuilder builder = new StringBuilder();
+            //1、建表语句
+            if (this.IsTableExist())
+            {
+
+            }
+            //2、列新增语句
+
+            //3、索引变更语句
+
+            //4、唯一索引变更语句
+
+            //5、外键语句
+
+            //6、注释语句
+            return builder.ToString();
+        }
 
         public EntityMapper(Type entityMapperType)
         {
