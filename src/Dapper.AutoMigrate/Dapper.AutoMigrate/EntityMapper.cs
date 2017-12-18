@@ -34,6 +34,11 @@ namespace Dapper.AutoMigrate
 
         public virtual string Collate => "utf8_bin";
 
+        public EntityMapper()
+        {
+            this.Fields = new List<PropertyMapper>();
+        }
+
         public abstract string GetPrimarySQL();
 
         public EntityMapper(Type entityMapperType)

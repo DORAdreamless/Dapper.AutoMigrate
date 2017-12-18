@@ -1,15 +1,10 @@
 ﻿using Dapper.AutoMigrate.Fluent;
 using Dapper.AutoMigrate.Mysql;
-using Dapper.AutoMigrate.Samples;
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Dapper.AutoMigrate
 {
@@ -68,10 +63,11 @@ namespace Dapper.AutoMigrate
     
         public static void RunSync()
         {
-
+            string sql = string.Empty;
             foreach (var entityMapper in paramCache.Values)
             {
-                entityMapper.GetCreateTableDDL();
+                sql=entityMapper.GetCreateTableDDL();
+                throw new Exception(sql);
             }
         }
 

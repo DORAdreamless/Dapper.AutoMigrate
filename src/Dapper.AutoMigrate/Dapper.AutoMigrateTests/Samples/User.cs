@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dapper.AutoMigrate.Samples
+namespace Dapper.AutoMigrate.Tests.Samples
 {
     [Table()]
     public class User : DbEntity
