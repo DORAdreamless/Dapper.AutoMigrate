@@ -27,7 +27,8 @@ namespace Dapper.AutoMigrate.Tests.Samples
         public string Phone { get; set; }
         [Column()]
         public string Email { get; set; }
-
+        [Column()]
+        public decimal Money { get; set; }
     }
 
 }

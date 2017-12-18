@@ -17,7 +17,8 @@ namespace ConsoleApp
         static void Main(string[] args)
         {
 
-            Engine.RegisterDataBase("System.Data.SqlClient", "server=.;uid=sa;pwd=123;database=nop;");
+            //Engine.RegisterDataBase("System.Data.SqlClient", "server=.;uid=sa;pwd=123;database=cloud;");
+            Engine.RegisterDataBase("System.Data.SqlClient", "server=localhost;uid=root;pwd=123456;database=cloud;");
             Engine.RunSync();
 
             Console.Read();
@@ -79,7 +80,8 @@ namespace ConsoleApp
 
         public static void RunSync()
         {
-            IPersistenceConfigurer configurer = MsSqlConfiguration.MsSql2012.ConnectionString(Engine.ConnectionString)
+            //IPersistenceConfigurer configurer = MsSqlConfiguration.MsSql2012.ConnectionString(Engine.ConnectionString)
+                  IPersistenceConfigurer configurer = MySQLConfiguration.Standard.ConnectionString(Engine.ConnectionString)
                 .FormatSql()
                 .ShowSql();
             Fluently.Configure()

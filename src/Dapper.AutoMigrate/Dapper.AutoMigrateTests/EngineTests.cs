@@ -15,8 +15,10 @@ namespace Dapper.AutoMigrate.Tests
         [TestMethod()]
         public void RunSyncTest()
         {
+            Engine.RegisterDataBase("MySql.Data.MySqlClient", "server=localhost;uid=root;pwd=123456;database=cloud;");
+
             Engine.RegisterModel(typeof(User));
-            Engine.RunSync();
+            Engine.RunSync(true);
         }
     }
 }

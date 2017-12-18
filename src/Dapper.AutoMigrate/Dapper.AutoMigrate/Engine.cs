@@ -61,13 +61,22 @@ namespace Dapper.AutoMigrate
         }
 
     
-        public static void RunSync()
+        public static void RunSync(bool force=false)
         {
             string sql = string.Empty;
             foreach (var entityMapper in paramCache.Values)
             {
                 sql=entityMapper.GetCreateTableDDL();
-                throw new Exception(sql);
+                if (string.IsNullOrWhiteSpace(sql))
+                    continue;
+                using (var connection = Engine.GetDbConnection())
+                {
+                    if (force)
+                    {
+                        connection.Execute("DROP TABLE IF EXISTS `" + entityMapper.TableName + "`;");
+                    }
+                    connection.Execute(sql);
+                }
             }
         }
 

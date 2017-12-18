@@ -48,6 +48,10 @@ namespace Dapper.AutoMigrate.Mysql
                     builder.Append(" default null");
                 }
             }
+            if (this.Unique)
+            {
+                builder.Append(" unique ");
+            }
             if (!string.IsNullOrWhiteSpace(this.Default))
             {
                 builder.Append(" default ").Append(this.Default);

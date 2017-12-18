@@ -4,3 +4,5 @@ E:\Works\csharp\Dapper.AutoMigrate\src\Dapper.AutoMigrate\Dapper.AutoMigrate\bin
 E:\Works\csharp\Dapper.AutoMigrate\src\Dapper.AutoMigrate\Dapper.AutoMigrate\bin\Debug\Dapper.AutoMigrate.pdb
 E:\Works\csharp\Dapper.AutoMigrate\src\Dapper.AutoMigrate\Dapper.AutoMigrate\obj\Debug\Dapper.AutoMigrate.dll
 E:\Works\csharp\Dapper.AutoMigrate\src\Dapper.AutoMigrate\Dapper.AutoMigrate\obj\Debug\Dapper.AutoMigrate.pdb
+E:\Works\csharp\Dapper.AutoMigrate\src\Dapper.AutoMigrate\Dapper.AutoMigrate\bin\Debug\Dapper.dll
+E:\Works\csharp\Dapper.AutoMigrate\src\Dapper.AutoMigrate\Dapper.AutoMigrate\bin\Debug\Dapper.xml
