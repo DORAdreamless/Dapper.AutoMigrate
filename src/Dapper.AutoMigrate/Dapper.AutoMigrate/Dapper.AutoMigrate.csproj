@@ -43,8 +43,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DbEntity.cs" />
+    <Compile Include="Fluent\ColumnAttribute.cs" />
     <Compile Include="Engine.cs" />
+    <Compile Include="Fluent\PrimaryKeyAttribute.cs" />
+    <Compile Include="IDbEntity.cs" />
+    <Compile Include="EntityMapper.cs" />
+    <Compile Include="Mssql\MssqlEntityMapper.cs" />
+    <Compile Include="Mssql\MssqlPropertyMapper.cs" />
+    <Compile Include="Mysql\MysqlEntityMapper.cs" />
+    <Compile Include="Mysql\MySqlPropertyMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyMapper.cs" />
+    <Compile Include="Fluent\TableAttribute.cs" />
+    <Compile Include="Samples\User.cs" />
+    <Compile Include="Utility\StringUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

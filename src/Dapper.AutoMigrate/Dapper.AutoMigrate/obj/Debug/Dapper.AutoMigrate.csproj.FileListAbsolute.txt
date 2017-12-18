@@ -1,0 +1,6 @@
+E:\Works\csharp\Dapper.AutoMigrate\src\Dapper.AutoMigrate\Dapper.AutoMigrate\obj\Debug\Dapper.AutoMigrate.csprojResolveAssemblyReference.cache
+E:\Works\csharp\Dapper.AutoMigrate\src\Dapper.AutoMigrate\Dapper.AutoMigrate\obj\Debug\Dapper.AutoMigrate.csproj.CoreCompileInputs.cache
+E:\Works\csharp\Dapper.AutoMigrate\src\Dapper.AutoMigrate\Dapper.AutoMigrate\bin\Debug\Dapper.AutoMigrate.dll
+E:\Works\csharp\Dapper.AutoMigrate\src\Dapper.AutoMigrate\Dapper.AutoMigrate\bin\Debug\Dapper.AutoMigrate.pdb
+E:\Works\csharp\Dapper.AutoMigrate\src\Dapper.AutoMigrate\Dapper.AutoMigrate\obj\Debug\Dapper.AutoMigrate.dll
+E:\Works\csharp\Dapper.AutoMigrate\src\Dapper.AutoMigrate\Dapper.AutoMigrate\obj\Debug\Dapper.AutoMigrate.pdb
