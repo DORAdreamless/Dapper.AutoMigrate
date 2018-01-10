@@ -1,6 +1,7 @@
 ﻿using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Mapping;
+using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 using System;
 using System.Collections.Generic;
@@ -17,8 +18,8 @@ namespace ConsoleApp
         static void Main(string[] args)
         {
 
-            //Engine.RegisterDataBase("System.Data.SqlClient", "server=.;uid=sa;pwd=123;database=cloud;");
-            Engine.RegisterDataBase("System.Data.SqlClient", "server=localhost;uid=root;pwd=123456;database=cloud;");
+            Engine.RegisterDataBase("System.Data.SqlClient", "server=.;uid=sa;pwd=123;database=cloud;");
+            //Engine.RegisterDataBase("System.Data.SqlClient", "server=localhost;uid=root;pwd=123456;database=cloud;");
             Engine.RunSync();
 
             Console.Read();
@@ -27,13 +28,15 @@ namespace ConsoleApp
 
     }
 
-    public class User
+    public class Account
     {
         public virtual Guid Id { get; set; }
 
         public virtual string Name { get; set; }
 
         public virtual string UserName { get; set; }
+        public virtual string PasswordSalt { get; set; }
+        public virtual string PasswordHash { get; set; }
         public virtual DateTime CreatedAt { get; set; }
 
         public virtual DateTime UpdatedAt { get; set; }
@@ -42,16 +45,18 @@ namespace ConsoleApp
     }
 
 
-    public class UserMap : ClassMap<User>
+    public class UserMap : ClassMap<Account>
     {
         public UserMap()
         {
             this.Id(item => item.Id).GeneratedBy.Assigned();
             this.Map(item => item.Name);
             this.Map(item => item.UserName).Unique();
-            this.Map(item => item.CreatedAt).Insert().Index("idx_user_created_at");
+            this.Map(item => item.PasswordHash);
+            this.Map(item => item.PasswordSalt);
+            this.Map(item => item.CreatedAt).Insert().Index();
             this.Map(item => item.UpdatedAt).Update();
-            this.Map(item => item.DeletedAt).Index("idx_user_deleted_at");
+            this.Map(item => item.DeletedAt).Index();
         }
     }
 
@@ -80,15 +85,20 @@ namespace ConsoleApp
 
         public static void RunSync()
         {
-            //IPersistenceConfigurer configurer = MsSqlConfiguration.MsSql2012.ConnectionString(Engine.ConnectionString)
-                  IPersistenceConfigurer configurer = MySQLConfiguration.Standard.ConnectionString(Engine.ConnectionString)
-                .FormatSql()
-                .ShowSql();
-            Fluently.Configure()
+            IPersistenceConfigurer configurer = MsSqlConfiguration.MsSql2012.ConnectionString(Engine.ConnectionString)
+                    .FormatSql()
+                    .ShowSql();
+
+                    //  IPersistenceConfigurer configurer = MySQLConfiguration.Standard.ConnectionString(Engine.ConnectionString)
+                    //.FormatSql()
+                    //.ShowSql();
+            NHibernate.Cfg.Configuration configuration = new NHibernate.Cfg.Configuration();
+            configuration.SetNamingStrategy(NHibernate.Cfg.LowerImprovedNamingStrategy.Instance);
+            Fluently.Configure(configuration)
                     .Database(
                       configurer
                     )
-                    .Mappings(c=>c.FluentMappings.AddFromAssembly(typeof(User).Assembly))
+                    .Mappings(c=>c.FluentMappings.AddFromAssembly(typeof(Account).Assembly))
                     .ExposeConfiguration(cfg=>new SchemaUpdate(cfg).Execute(true,true))
                     .BuildSessionFactory();
         }

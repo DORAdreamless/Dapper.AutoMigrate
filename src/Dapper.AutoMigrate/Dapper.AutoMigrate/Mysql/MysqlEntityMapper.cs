@@ -69,5 +69,10 @@ namespace Dapper.AutoMigrate.Mysql
         {
             throw new NotImplementedException();
         }
+
+        public override bool HasTable()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

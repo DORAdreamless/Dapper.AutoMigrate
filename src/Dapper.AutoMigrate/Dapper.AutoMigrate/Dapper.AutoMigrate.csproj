@@ -46,6 +46,7 @@
     <Compile Include="DbEntity.cs" />
     <Compile Include="Fluent\ColumnAttribute.cs" />
     <Compile Include="Engine.cs" />
+    <Compile Include="Fluent\INamingStrategy.cs" />
     <Compile Include="Fluent\PrimaryKeyAttribute.cs" />
     <Compile Include="IDbEntity.cs" />
     <Compile Include="EntityMapper.cs" />

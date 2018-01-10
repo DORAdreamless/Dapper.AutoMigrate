@@ -26,6 +26,16 @@ namespace Dapper.AutoMigrate
             return dbConnection;
         }
 
+        public static IDbCommand GetDbCommand(IDbConnection connection)
+        {
+            return connection.CreateCommand();
+        }
+
+        public static IDataReader GetReader(IDbCommand command)
+        {
+            return command.ExecuteReader();
+        }
+
         public static void RegisterDataBase(string providerInvariantName, string connectionString)
         {
             Engine.ProviderInvariantName = providerInvariantName;

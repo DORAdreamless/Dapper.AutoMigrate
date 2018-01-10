@@ -63,6 +63,12 @@ namespace Dapper.AutoMigrate
         public bool ParmaryKey { get;  set; }
         public bool Auto { get;  set; }
 
+        public abstract bool HasColumn();
+
+        public abstract bool HasIndex();
+
+        public abstract bool HasForeignKey(string foreignKeyName);
+
         public abstract string GetCreateColumnSQL();
 
         public abstract string GetAlterColumnSQL();

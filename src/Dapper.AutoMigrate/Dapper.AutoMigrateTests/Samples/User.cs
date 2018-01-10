@@ -1,6 +1,7 @@
 ﻿using Dapper.AutoMigrate.Fluent;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ namespace Dapper.AutoMigrate.Tests.Samples
     [Table()]
     public class User : DbEntity
     {
+        [Description("昵称")]
         [Column()]
         public string NickName { get; set; }
 

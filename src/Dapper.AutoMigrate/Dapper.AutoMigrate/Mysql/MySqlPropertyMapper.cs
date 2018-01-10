@@ -56,6 +56,7 @@ namespace Dapper.AutoMigrate.Mysql
             {
                 builder.Append(" default ").Append(this.Default);
             }
+            builder.AppendFormat(" COMMENT '{0}'",this.ColumnDescription);
             return builder.ToString();
         }
 
@@ -125,6 +126,21 @@ namespace Dapper.AutoMigrate.Mysql
         }
 
         public override string GetDropColumnSQL()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool HasColumn()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool HasForeignKey(string foreignKeyName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool HasIndex()
         {
             throw new NotImplementedException();
         }

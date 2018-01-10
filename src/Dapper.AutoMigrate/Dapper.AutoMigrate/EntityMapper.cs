@@ -10,23 +10,31 @@ namespace Dapper.AutoMigrate
 {
     public abstract class EntityMapper
     {
+        /// <summary>
+        /// 表名
+        /// </summary>
         public string TableName { get; set; }
-
+        /// <summary>
+        /// 表备注
+        /// </summary>
         public string TableDescription { get; set; }
-
+        /// <summary>
+        /// 构架
+        /// </summary>
         public string Schema { get; set; }
 
-        public List<PropertyMapper> PropertyMappers { get; }
-
-        public PropertyInfo[] Properties { get; set; }
-
-        public abstract bool IsTableExist();
-
-        public abstract string GetCreateTableDDL();
-
+        /// <summary>
+        /// 参数前缀
+        /// </summary>
         public abstract string ParameterNamePrefix { get; }
+        /// <summary>
+        /// 前缀·
+        /// </summary>
 
         public abstract string NamePrefix { get; }
+        /// <summary>
+        /// 后缀
+        /// </summary>
 
         public abstract string NameSuffix { get; }
 
@@ -36,9 +44,20 @@ namespace Dapper.AutoMigrate
 
         public virtual string Collate => "utf8_bin";
 
+        public List<PropertyMapper> PropertyMappers { get; }
 
+        public PropertyInfo[] Properties { get; set; }
+
+        public abstract bool HasTable();
+
+       
 
         public abstract string GetPrimarySQL();
+
+
+        public abstract bool IsTableExist();
+
+        public abstract string GetCreateTableDDL();
 
         public  string GetSyncScripts(StreamWriter streamWriter)
         {
