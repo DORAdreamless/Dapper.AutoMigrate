@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Tiantianquan.Common.Application;
 using Tiantianquan.Common.Autofac;
 using Tiantianquan.Common.Dependency;
 
@@ -18,7 +19,7 @@ namespace Tiantianquan.Common.Configurations
             ((AutofacObjectContainer)ObjectContainer.Current).ContainerBuilder.RegisterType<TransactionScopeInterceptor>().SingleInstance();
             foreach (Assembly assembly in assemblies)
             {
-                var types = assembly.GetTypes().Where(x => x.IsDefined(typeof(ComponentAttribute), true)).ToArray();
+                var types = assembly.GetTypes().Where(x => typeof(BaseService).IsAssignableFrom(x)&&!x.IsAbstract).ToArray();
                 ((AutofacObjectContainer)ObjectContainer.Current).ContainerBuilder.RegisterTypes(types).SingleInstance().EnableClassInterceptors();
             }
             

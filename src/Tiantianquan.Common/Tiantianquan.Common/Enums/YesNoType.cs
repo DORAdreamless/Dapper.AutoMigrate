@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tiantianquan.Common.Application
+namespace Tiantianquan.Common.Enums
 {
-   public class TransactionAttribute: Attribute
+    public enum YesNoType
     {
+        Yes = 1,
+        No = 2
     }
 }

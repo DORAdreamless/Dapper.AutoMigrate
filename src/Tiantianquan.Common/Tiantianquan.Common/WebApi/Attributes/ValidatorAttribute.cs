@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tiantianquan.Common.Application
+namespace Tiantianquan.Common.WebApi.Attributes
 {
-   public class TransactionAttribute: Attribute
+ public   class ValidatorAttribute:Attribute
     {
     }
 }

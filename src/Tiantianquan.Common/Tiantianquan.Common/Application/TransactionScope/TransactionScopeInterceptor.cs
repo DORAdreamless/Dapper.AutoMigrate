@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
 
-namespace Tiantianquan.Common
+namespace Tiantianquan.Common.Application
 {
     public class TransactionScopeInterceptor : IInterceptor
     {
