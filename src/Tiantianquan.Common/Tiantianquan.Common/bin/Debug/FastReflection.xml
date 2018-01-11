@@ -1,0 +1,147 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FastReflection</name>
+    </assembly>
+    <members>
+        <member name="T:System.FastReflection.MethodInvoker">
+            <summary>
+            Delegate use to invoke any method
+            </summary>
+        </member>
+        <member name="T:System.FastReflection.MemberGetter">
+            <summary>
+            Delegate use to set get property or field
+            </summary>
+        </member>
+        <member name="T:System.FastReflection.MemberSetter">
+            <summary>
+            Delegate use to set any property or field
+            </summary>
+        </member>
+        <member name="T:System.FastReflection.ReflectionExtensions">
+            <summary>
+            Extension methods for reflection
+            </summary>
+        </member>
+        <member name="M:System.FastReflection.ReflectionExtensions.MakeInvoker(System.Reflection.MethodInfo)">
+            <summary>
+            Create dynamic delegate from method info
+            </summary>
+        </member>
+        <member name="M:System.FastReflection.ReflectionExtensions.MakeSetter(System.Reflection.MemberInfo)">
+            <summary>
+            Create setter delegate from member info, support property and field
+            </summary>
+        </member>
+        <member name="M:System.FastReflection.ReflectionExtensions.MakeGetter(System.Reflection.MemberInfo)">
+            <summary>
+            Create setter delegate from member info, support property and field
+            </summary>
+        </member>
+        <member name="M:System.FastReflection.ReflectionExtensions.FastInvoke(System.Reflection.MethodInfo,System.Object,System.Object[])">
+            <summary>
+            Same as MethodInfo.Invoke, but work faster
+            </summary>
+        </member>
+        <member name="M:System.FastReflection.ReflectionExtensions.FastSetValue(System.Reflection.MemberInfo,System.Object,System.Object)">
+            <summary>
+            Same as PropertyInfo.SetValue or FieldInfo.SetValue, but work faster
+            </summary>
+        </member>
+        <member name="M:System.FastReflection.ReflectionExtensions.FastGetValue(System.Reflection.MemberInfo,System.Object)">
+            <summary>
+            Same as PropertyInfo.GetValue or FieldInfo.GetValue, but work faster
+            </summary>
+        </member>
+        <member name="M:System.FastReflection.ReflectionExtensions.FastGetProperties(System.Type,System.Reflection.BindingFlags)">
+            <summary>
+            Same as Type.GetProperties(bindFlags), but work faster
+            </summary>
+        </member>
+        <member name="M:System.FastReflection.ReflectionExtensions.FastGetProperties(System.Type)">
+            <summary>
+            Same as Type.GetProperties(), but work faster
+            </summary>
+        </member>
+        <member name="M:System.FastReflection.ReflectionExtensions.FastGetFields(System.Type,System.Reflection.BindingFlags)">
+            <summary>
+            Same as Type.GetFields(bindFlags), but work faster
+            </summary>
+        </member>
+        <member name="M:System.FastReflection.ReflectionExtensions.FastGetFields(System.Type)">
+            <summary>
+            Same as Type.GetFields(), but work faster
+            </summary>
+        </member>
+        <member name="M:System.FastReflection.ReflectionExtensions.FastGetMethods(System.Type,System.Reflection.BindingFlags)">
+            <summary>
+            Same as Type.GetMethods(bindingFlags), but work faster
+            </summary>
+        </member>
+        <member name="M:System.FastReflection.ReflectionExtensions.FastGetMethods(System.Type)">
+            <summary>
+            Same as Type.GetMethods(), but work faster
+            </summary>
+        </member>
+        <member name="M:System.FastReflection.ReflectionExtensions.FastGetCustomAttributes(System.Reflection.MemberInfo,System.Type)">
+            <summary>
+            Same as GetCustomAttributes(attributeType, false), but work faster
+            </summary>
+        </member>
+        <member name="M:System.FastReflection.ReflectionExtensions.FastGetCustomAttributes(System.Reflection.MemberInfo,System.Type,System.Boolean)">
+            <summary>
+            Same as GetCustomAttributes(attributeType, inherit), but work faster
+            </summary>
+        </member>
+        <member name="M:System.FastReflection.ReflectionExtensions.FastGetInterfaces(System.Type)">
+            <summary>
+            Same as Type.GetInterfaces()
+            Original implemenation is enough fast, here just call the original method
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.FastReflection.ReflectionExtensions.FastGetProperty(System.Type,System.String,System.Reflection.BindingFlags)">
+            <summary>
+            Same as Type.GetProperty(name, bindFlags)
+            Original implemenation is enough fast, here just call the original method
+            </summary>
+        </member>
+        <member name="M:System.FastReflection.ReflectionExtensions.FastGetProperty(System.Type,System.String)">
+            <summary>
+            Same as Type.GetProperty(name)
+            Original implemenation is enough fast, here just call the original method
+            </summary>
+        </member>
+        <member name="M:System.FastReflection.ReflectionExtensions.FastGetField(System.Type,System.String,System.Reflection.BindingFlags)">
+            <summary>
+            Same as Type.GetField(name, bindFlags)
+            Original implemenation is enough fast, here just call the original method
+            </summary>
+        </member>
+        <member name="M:System.FastReflection.ReflectionExtensions.FastGetField(System.Type,System.String)">
+            <summary>
+            Same as Type.GetField(name)
+            Original implemenation is enough fast, here just call the original method
+            </summary>
+        </member>
+        <member name="M:System.FastReflection.ReflectionExtensions.FastGetMethod(System.Type,System.String,System.Reflection.BindingFlags)">
+            <summary>
+            Same as Type.GetMethod(name, bindFlags)
+            Original implemenation is enough fast, here just call the original method
+            </summary>
+        </member>
+        <member name="M:System.FastReflection.ReflectionExtensions.FastGetMethod(System.Type,System.String)">
+            <summary>
+            Same as Type.GetMethod(name)
+            Original implemenation is enough fast, here just call the original method
+            </summary>
+        </member>
+        <member name="T:System.FastReflection.StructTuple`2">
+            <summary>
+            Struct type tuple
+            </summary>
+        </member>
+    </members>
+</doc>

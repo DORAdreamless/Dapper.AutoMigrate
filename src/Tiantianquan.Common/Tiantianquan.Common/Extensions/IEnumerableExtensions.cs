@@ -1,42 +1,39 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Tiantianquan.Common.Extensions
-{
-    public static class IEnumerableExtensions
-    {
-        public static void ForEach<T>(this IEnumerable<T> enumerable, Action<T> action)
-        {
-            foreach (var element in enumerable)
-            {
-                action(element);
-            }
-        }
-        public static IEnumerable<T> Safe<T>(this IEnumerable<T> collection)
-        {
-            return collection ?? Enumerable.Empty<T>();
-        }
+namespace Tiantianquan.Common.Extensions {
+	/// <summary>
+	/// IEnumerable extension methods
+	/// </summary>
+	public static class IEnumerableExtensions {
+		/// <summary>
+		/// Concat object if it's not null
+		/// </summary>
+		/// <typeparam name="T">Element type</typeparam>
+		/// <param name="elements">Elements</param>
+		/// <param name="element">The object to concat</param>
+		/// <returns></returns>
+		public static IEnumerable<T> ConcatIfNotNull<T>(
+			this IEnumerable<T> elements, T element) {
+			if (element != null) {
+				return elements.Concat(new[] { element });
+			}
+			return elements;
+		}
 
-        public static bool Contains<T>(this IEnumerable<T> collection, Predicate<T> condition)
-        {
-            return collection.Any(x => condition(x));
-        }
-
-        public static bool IsEmpty<T>(this IEnumerable<T> collection)
-        {
-            if (collection == null)
-                return true;
-            var coll = collection as ICollection;
-            if (coll != null)
-                return coll.Count == 0;
-            return !collection.Any();
-        }
-
-        public static bool IsNotEmpty<T>(this IEnumerable<T> collection)
-        {
-            return !IsEmpty(collection);
-        }
-    }
+		/// <summary>
+		/// Perform the given action to each element
+		/// </summary>
+		/// <typeparam name="T">Element type</typeparam>
+		/// <param name="elements">Elements</param>
+		/// <param name="action">The action</param>
+		/// <returns></returns>
+		public static void ForEach<T>(
+			this IEnumerable<T> elements, Action<T> action) {
+			foreach (var element in elements) {
+				action(element);
+			}
+		}
+	}
 }

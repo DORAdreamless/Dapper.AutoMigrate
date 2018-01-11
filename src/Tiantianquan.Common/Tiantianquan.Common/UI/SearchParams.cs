@@ -76,10 +76,12 @@ namespace Tiantianquan.Common.UI
             }
             if (this.Order.ToLower() == Asc)
             {
+                criteria.ClearOrders();
                  criteria.AddOrder(NHibernate.Criterion.Order.Asc(this.Sort));
             }else if (this.Order.ToLower() == Desc)
             {
-                 criteria.AddOrder(NHibernate.Criterion.Order.Desc(this.Sort));
+                criteria.ClearOrders();
+                criteria.AddOrder(NHibernate.Criterion.Order.Desc(this.Sort));
             }
             return criteria;
         }

@@ -26,20 +26,20 @@ namespace Tiantianquan.Common.Repositories
 
         public void Delete(TKey id)
         {
-            TEntity entity=Session.Load<TEntity>(id);
+            TEntity entity = Session.Load<TEntity>(id);
             Session.Delete(entity);
         }
 
         public void BatchDelete(IEnumerable<TKey> ids)
         {
-           string entityName= typeof(TEntity).Name;
-            string hql = "delete from " + entityName + " as t where ? like  '%' + t.Id + '%' ";
-            Session.CreateQuery(hql).SetString(0, string.Join(",", ids)).ExecuteUpdate();
+            string entityName = typeof(TEntity).Name;
+            string hql = "delete from " + entityName + " as t where t.Id in (:ids)";
+            Session.CreateQuery(hql).SetParameterList("ids", ids).ExecuteUpdate();
         }
 
         public IQueryable<TEntity> GetAll()
         {
-          return  Session.Query<TEntity>();
+            return Session.Query<TEntity>();
         }
 
         public TEntity GetById(TKey id)
@@ -49,8 +49,8 @@ namespace Tiantianquan.Common.Repositories
 
         public List<TEntity> GetByIds(IEnumerable<TKey> ids)
         {
-           ICriteria criteria= Session.CreateCriteria<TEntity>();
-            criteria.Add(Restrictions.In("Id",ids.ToArray()));
+            ICriteria criteria = Session.CreateCriteria<TEntity>();
+            criteria.Add(Restrictions.In("Id", ids.ToArray()));
             return criteria.List<TEntity>().ToList();
         }
 
@@ -61,8 +61,8 @@ namespace Tiantianquan.Common.Repositories
 
         public void Update(TEntity entity)
         {
-           // Session.Evict(entity);
-          //  Session.Merge(entity);
+            // Session.Evict(entity);
+            //  Session.Merge(entity);
             Session.Update(entity);
         }
     }
