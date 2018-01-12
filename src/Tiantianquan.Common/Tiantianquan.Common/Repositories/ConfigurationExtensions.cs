@@ -43,15 +43,15 @@ namespace Tiantianquan.Common.Configurations
             }
             return configuration;
         }
-        public static Configuration RegisterDomainAssembly(this Configuration configuration, params Assembly[] assemblies)
-        {
-            configuration.domainAssemblies.AddRange(assemblies);
-            return configuration;
-        }
+        //public static Configuration RegisterDomainAssembly(this Configuration configuration, params Assembly[] assemblies)
+        //{
+        //    configuration.domainAssemblies.AddRange(assemblies);
+        //    return configuration;
+        //}
         public static Configuration RunAsync(this Configuration configuration, params Assembly[] assemblies)
         {
-            configuration.RegisterDomainAssembly(assemblies);
-            Engine.RunSync(configuration.domainAssemblies.ToArray());
+      
+            Engine.RunSync(configuration.repositoryAssemblies.ToArray());
             return configuration;
         }
     }

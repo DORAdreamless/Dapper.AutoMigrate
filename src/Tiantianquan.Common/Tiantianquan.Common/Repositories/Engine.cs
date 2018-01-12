@@ -2,6 +2,8 @@
 using Dapper;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
+using FluentNHibernate.Mapping;
+using FluentNHibernate.MappingModel;
 using NHibernate.Cfg;
 using NHibernate.Dialect;
 using NHibernate.Tool.hbm2ddl;
@@ -29,7 +31,7 @@ namespace Tiantianquan.Common.Repositories
 
         private static List<string> ExtraSqls = new List<string>();
 
-   
+
         public static IDbConnection GetDbConnection()
         {
             DbProviderFactory dbProviderFactory = DbProviderFactories.GetFactory(ProviderInvariantName);
@@ -47,21 +49,34 @@ namespace Tiantianquan.Common.Repositories
 
         public static void RunSync(params Assembly[] assemblies)
         {
-           
-
-
-            List<Type> dbEntityTypes = new List<Type>();
+            List<Type> listNhibernateMapType = new List<Type>();
             foreach (var assembly in assemblies)
             {
-                dbEntityTypes.AddRange(assembly.GetTypes().Where(type => typeof(IBaseEntity).IsAssignableFrom(type) && !type.IsAbstract));
+                listNhibernateMapType.AddRange(assembly.GetTypes().Where(type => Utils.ReflectionUtils.IsAssignableToGenericType(type, typeof(ClassMap<>)) && !type.IsAbstract));
             }
-            foreach (var dbEntityType in dbEntityTypes)
+
+
+
+            //List<Type> dbEntityTypes = new List<Type>();
+            //foreach (var assembly in assemblies)
+            //{
+            //    dbEntityTypes.AddRange(assembly.GetTypes().Where(type => typeof(IBaseEntity).IsAssignableFrom(type) && !type.IsAbstract));
+            //}
+            foreach (var NhibernateMapType in listNhibernateMapType)
             {
-                string tableName=DefaultNamingStrategy.Instance.ClassToTableName(dbEntityType.Name);
-                string tableDescription = dbEntityType.Name;
-                if (dbEntityType.IsDefined(typeof(DescriptionAttribute)))
+                Type nhibernateType = NhibernateMapType.BaseType.GenericTypeArguments[0];
+                var attributesField = NhibernateMapType.BaseType.BaseType.GetField("attributes", BindingFlags.NonPublic | BindingFlags.Instance);
+                AttributeStore attributes = (AttributeStore)attributesField.GetValue(Activator.CreateInstance(NhibernateMapType));
+                string tableName = attributes.GetOrDefault<string>("TableName");
+                if (string.IsNullOrWhiteSpace(tableName))
                 {
-                    tableDescription = dbEntityType.GetCustomAttribute<DescriptionAttribute>().Description;
+                    tableName = DefaultNamingStrategy.Instance.ClassToTableName(nhibernateType.Name);
+                }
+
+                string tableDescription = nhibernateType.Name;
+                if (nhibernateType.IsDefined(typeof(DescriptionAttribute)))
+                {
+                    tableDescription = nhibernateType.GetCustomAttribute<DescriptionAttribute>().Description;
                 }
                 ExtraSqls.Add(string.Format(@"declare @CurrentUser sysname
                                             select @CurrentUser = user_name()
@@ -70,10 +85,31 @@ namespace Tiantianquan.Common.Repositories
                                                 exec sys.sp_dropextendedproperty 'MS_Description', 'schema', @CurrentUser, 'table', '{0}'
                                             END
                                             exec sys.sp_addextendedproperty 'MS_Description', '{1}', 'schema', @CurrentUser, 'table', '{0}'
-                                            ",tableName,tableDescription));
+                                            ", tableName, tableDescription));
 
-                foreach (var property in dbEntityType.GetProperties())
+                foreach (var property in nhibernateType.GetProperties())
                 {
+                   bool isSystemType= property.PropertyType == typeof(bool) ||
+                    property.PropertyType == typeof(string) ||
+                    property.PropertyType == typeof(short) ||
+                    property.PropertyType == typeof(int) ||
+                    property.PropertyType == typeof(long) ||
+                    property.PropertyType == typeof(float) ||
+                    property.PropertyType == typeof(double) ||
+                    property.PropertyType == typeof(decimal) ||
+                    property.PropertyType == typeof(byte) ||
+                    property.PropertyType == typeof(byte[]) ||
+                    property.PropertyType == typeof(Single) ||
+                    property.PropertyType == typeof(ushort) ||
+                    property.PropertyType == typeof(uint) ||
+                    property.PropertyType == typeof(ulong) ||
+                    property.PropertyType == typeof(DateTime) ||
+                    property.PropertyType == typeof(DateTimeOffset) ||
+                    property.PropertyType == typeof(Guid);
+                    if (!isSystemType)
+                    {
+                        continue;
+                    }
                     string columnName = DefaultNamingStrategy.Instance.PropertyToColumnName(property.Name);
                     string columnDescription = property.Name;
                     if (property.IsDefined(typeof(DescriptionAttribute)))
@@ -87,25 +123,25 @@ namespace Tiantianquan.Common.Repositories
                                                     exec sys.sp_dropextendedproperty 'MS_Description', 'schema', @CurrentUser, 'table', '{0}', 'column', '{1}'
                                                 END
                                                 exec sys.sp_addextendedproperty 'MS_Description', '{2}', 'schema', @CurrentUser, 'table', '{0}', 'column', '{1}'
-                                                ",tableName,columnName, columnDescription));
+                                                ", tableName, columnName, columnDescription));
                 }
             }
             ILogger logger = ObjectContainer.Current.Resolve<ILoggerFactory>().Create(typeof(Engine));
             foreach (var sql in ExtraSqls)
             {
-               
+
                 using (IDbConnection connection = GetDbConnection())
                 {
-                    
+
                     try
                     {
                         connection.Execute(sql);
-                        
+
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
-                       
-                        logger.Error(ex.Message + sql,ex);
+
+                        logger.Error(ex.Message + sql, ex);
                     }
                 }
             }
@@ -134,7 +170,7 @@ namespace Tiantianquan.Common.Repositories
             //string drop2 = string.Format("alter table `{0}` drop index `{1}` ;", tableName1, foreignkey);
             //ExtraSqls.Add(drop2);
             string drop = string.Format("alter table \"{0}\" drop constraint \"{1}\";", tableName1, foreignkey);
-            ExtraSqls.Add(drop);
+            //  ExtraSqls.Add(drop);
             string create = string.Format("alter table \"{0}\" add constraint \"{1}\" foreign key (\"{2}\") references \"{3}\" (\"{4}\") on delete no action on update no action",
                 tableName1,
                 foreignkey,
@@ -142,7 +178,7 @@ namespace Tiantianquan.Common.Repositories
                 tableName2,
                 columnName2
                 );
-            ExtraSqls.Add(create);
+            //  ExtraSqls.Add(create);
         }
     }
 }

@@ -11,7 +11,7 @@ using Tiantianquan.Privilege.Domain;
 namespace Tiantianquan.Privilege.Repositories
 {
 
-    public class ApplicationMap: BaseClassMap<Application,string>
+    public class ApplicationMap: BaseClassMap<Tiantianquan.Privilege.Domain.Application, string>
     {
         public ApplicationMap()
         {

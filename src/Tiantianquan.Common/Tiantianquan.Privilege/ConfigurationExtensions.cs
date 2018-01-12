@@ -14,7 +14,6 @@ namespace Tiantianquan.Common.Configurations
         {
             Assembly assembly = typeof(ApplicationUser).Assembly;
             configuration.RegisterApplicationAssembly(assembly);
-            configuration.RegisterDomainAssembly(assembly);
             configuration.RegisterWebApiAssembly(assembly);
             configuration.RegisterRepositoriesAssembly(assembly);
             return configuration;

@@ -30,7 +30,7 @@ namespace Tiantianquan.Privilege.Repositories
             this.Map(item => item.ResourceType);
             this.Map(item => item.Attributes);
 
-            Engine.AddForeignKey<NavigationMenu, Application>(item => item.ApplicationId, item => item.Id);
+            Engine.AddForeignKey<NavigationMenu, Tiantianquan.Privilege.Domain.Application>(item => item.ApplicationId, item => item.Id);
             Engine.AddForeignKey<NavigationMenu, NavigationMenu>(item => item.ParentId, item => item.Id);
         }
     }

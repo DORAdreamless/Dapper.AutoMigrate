@@ -34,14 +34,33 @@
     <Reference Include="FluentNHibernate, Version=2.0.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\Tiantianquan.Hos.Web\packages\FluentNHibernate.2.0.3.0\lib\net40\FluentNHibernate.dll</HintPath>
     </Reference>
+    <Reference Include="FluentValidation, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\Tiantianquan.Hos.Web\packages\FluentValidation.7.2.1\lib\net45\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation.WebApi, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\Tiantianquan.Hos.Web\packages\FluentValidation.WebApi.7.2.1\lib\net45\FluentValidation.WebApi.dll</HintPath>
+    </Reference>
     <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\Tiantianquan.Hos.Web\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\Tiantianquan.Hos.Web\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\Tiantianquan.Hos.Web\packages\NHibernate.4.0.0.4000\lib\net40\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\Tiantianquan.Hos.Web\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\Tiantianquan.Hos.Web\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\Tiantianquan.Hos.Web\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,23 +69,55 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\ApplicationRoleService.cs" />
+    <Compile Include="Application\ApplicationService.cs" />
+    <Compile Include="Application\ApplicationUserService.cs" />
+    <Compile Include="Application\NavigationMenuService.cs" />
+    <Compile Include="Application\PermissionService.cs" />
     <Compile Include="ConfigurationExtensions.cs" />
     <Compile Include="Domain\ApplicationRoles\ApplicationRole.cs" />
+    <Compile Include="Domain\ApplicationRoles\ApplicationRoleDto.cs" />
+    <Compile Include="Domain\ApplicationRoles\ApplicationRoleDtoValidator.cs" />
+    <Compile Include="Domain\ApplicationRoles\ApplicationRoleSearchParams.cs" />
+    <Compile Include="Domain\ApplicationRoles\IApplicationRoleRepository.cs" />
+    <Compile Include="Domain\Applications\ApplicationDto.cs" />
+    <Compile Include="Domain\Applications\ApplicationDtoValidator.cs" />
+    <Compile Include="Domain\Applications\ApplicationSearchParams.cs" />
+    <Compile Include="Domain\Applications\IApplicationRepository.cs" />
     <Compile Include="Domain\ApplicationUsers\ApplicationUser.cs" />
     <Compile Include="Domain\Applications\Application.cs" />
+    <Compile Include="Domain\ApplicationUsers\ApplicationUserDto.cs" />
+    <Compile Include="Domain\ApplicationUsers\ApplicationUserDtoValidator.cs" />
+    <Compile Include="Domain\ApplicationUsers\ApplicationUserSearchParams.cs" />
+    <Compile Include="Domain\ApplicationUsers\IApplicationUserRepository.cs" />
+    <Compile Include="Domain\NavigationMenus\INavigationMenuRepository.cs" />
+    <Compile Include="Domain\NavigationMenus\NavigationMenuDto.cs" />
+    <Compile Include="Domain\NavigationMenus\NavigationMenuDtoValidator.cs" />
+    <Compile Include="Domain\NavigationMenus\NavigationMenuSearchParams.cs" />
     <Compile Include="Domain\NavigationMenus\NegotiatMenus.cs" />
+    <Compile Include="Domain\Permissions\IPermissionRepository.cs" />
     <Compile Include="Domain\Permissions\Permission.cs" />
+    <Compile Include="Domain\Permissions\PermissionDto.cs" />
+    <Compile Include="Domain\Permissions\PermissionDtoValidator.cs" />
+    <Compile Include="Domain\Permissions\PermissionSearchParams.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ApplicationRoles\ApplicationRoleMap.cs" />
+    <Compile Include="Repositories\ApplicationRoles\ApplicationRoleRepository.cs" />
     <Compile Include="Repositories\Applications\ApplicationMap.cs" />
+    <Compile Include="Repositories\Applications\ApplicationRepository.cs" />
     <Compile Include="Repositories\ApplicationUsers\ApplicationUserMap.cs" />
+    <Compile Include="Repositories\ApplicationUsers\ApplicationUserRepository.cs" />
     <Compile Include="Repositories\NavigationMenus\NavigationMenuMap.cs" />
+    <Compile Include="Repositories\NavigationMenus\NavigationMenuRepository.cs" />
     <Compile Include="Repositories\Permissions\PermissionMap.cs" />
+    <Compile Include="Repositories\Permissions\PermissionRepository.cs" />
+    <Compile Include="WebApi\ApplicationController.cs" />
+    <Compile Include="WebApi\ApplicationRoleController.cs" />
+    <Compile Include="WebApi\ApplicationUserController.cs" />
+    <Compile Include="WebApi\NavigationMenuController.cs" />
+    <Compile Include="WebApi\PermissionController.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Application\" />
-    <Folder Include="WebApi\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Tiantianquan.Common\Tiantianquan.Common.csproj">
       <Project>{8eb5af60-b273-48a5-8daa-5e97687d9bc7}</Project>

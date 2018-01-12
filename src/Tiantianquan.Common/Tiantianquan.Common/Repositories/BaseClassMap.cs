@@ -8,7 +8,7 @@ using Tiantianquan.Common.Domain;
 
 namespace Tiantianquan.Common.Repositories
 {
-    public class BaseClassMap<TEntity, TKey> : ClassMap<TEntity> where TEntity : BaseEntity<TKey>
+    public abstract class BaseClassMap<TEntity, TKey> : ClassMap<TEntity> where TEntity : BaseEntity<TKey>
     {
         public BaseClassMap()
         {
@@ -18,7 +18,7 @@ namespace Tiantianquan.Common.Repositories
         }
     }
 
-    public class BaseClassMap<TEntity> : BaseClassMap<TEntity,Guid> where TEntity : BaseEntity<Guid>
+    public abstract class BaseClassMap<TEntity> : BaseClassMap<TEntity,Guid> where TEntity : BaseEntity<Guid>
     {
       
     }

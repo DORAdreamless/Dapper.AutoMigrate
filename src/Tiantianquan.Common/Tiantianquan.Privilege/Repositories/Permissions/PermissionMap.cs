@@ -28,7 +28,7 @@ namespace Tiantianquan.Privilege.Repositories
             this.Map(item => item.Granted);
             this.Map(item => item.CreatedUserId).Nullable();
 
-            Engine.AddForeignKey<Permission, Application>(item => item.ApplicationId, item => item.Id);
+            Engine.AddForeignKey<Permission, Tiantianquan.Privilege.Domain.Application>(item => item.ApplicationId, item => item.Id);
             Engine.AddForeignKey<Permission, ApplicationRole>(item => item.ApplicationRoleId, item => item.Id);
             Engine.AddForeignKey<Permission, ApplicationUser>(item => item.ApplicationUserId, item => item.Id);
             Engine.AddForeignKey<Permission, NavigationMenu>(item => item.NavigationMenuId, item => item.Id);

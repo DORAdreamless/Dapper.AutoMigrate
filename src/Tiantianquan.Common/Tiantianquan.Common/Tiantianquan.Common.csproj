@@ -147,6 +147,7 @@
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\NhibernateRepository.cs" />
     <Compile Include="Repositories\NhSessionFactory.cs" />
+    <Compile Include="UI\CascaderNode.cs" />
     <Compile Include="UI\PageResult.cs" />
     <Compile Include="UI\SearchParams.cs" />
     <Compile Include="UI\TreeNode.cs" />
