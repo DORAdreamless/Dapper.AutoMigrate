@@ -45,6 +45,21 @@ namespace Tiantianquan.Privilege.Domain
         [Description("名字")]
         public virtual string LastName { get; set; }
         /// <summary>
+        /// 性别
+        /// </summary>
+        [Description("性别")]
+        public virtual int Sex { get; set; }
+        /// <summary>
+        /// 出生日期
+        /// </summary>
+        [Description("出生日期")]
+        public virtual DateTime Birthday { get; set; }
+        /// <summary>
+        /// 年龄
+        /// </summary>
+        [Description("年龄")]
+        public virtual int Age { get; set; }
+        /// <summary>
         /// 手机
         /// </summary>
         [Description("手机")]
@@ -71,5 +86,28 @@ namespace Tiantianquan.Privilege.Domain
         /// </summary>
         [Description("最后登录IP")]
         public virtual string LastLoginIP { get; set; }
+
+        /// <summary>
+        /// 是否锁定 锁定后不允许登录
+        /// </summary>
+        [Description("是否锁定")]
+        public virtual bool Locked { get; set; }
+
+        /// <summary>
+        /// 上次锁定时间
+        /// </summary>
+        [Description("上次锁定时间")]
+        public virtual DateTime LockedTime { get; set; }
+
+        /// <summary>
+        /// 是否已登录 限制同一个用户只能登录一次
+        /// </summary>
+        [Description("是否已登录")]
+        public virtual bool Logined { get; set; }
+        /// <summary>
+        /// 用户所属角色
+        /// </summary>
+        [Description("用户所属角色")]
+        public virtual ISet<ApplicationRole> ApplicationRoles { get; set; }
     }
 }

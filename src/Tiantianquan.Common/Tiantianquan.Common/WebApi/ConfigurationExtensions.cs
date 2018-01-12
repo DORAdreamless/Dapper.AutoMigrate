@@ -13,14 +13,22 @@ namespace Tiantianquan.Common.Configurations
 {
    public static partial class ConfigurationExtensions
     {
+        public static Configuration RegisterWebApiAssembly(this Configuration configuration, params Assembly[] assemblies)
+        {
+            configuration.webapiAssemblies.AddRange(assemblies);
+            return configuration;
+        }
+
         public static Configuration UseWebApi(this Configuration configuration, HttpConfiguration config, params Assembly[] assemblies)
         {
+            configuration.webapiAssemblies.AddRange(assemblies);
+
             var builder = ((AutofacObjectContainer)ObjectContainer.Current).ContainerBuilder;
 
 
 
             // Register your Web API controllers.
-            builder.RegisterApiControllers(assemblies);
+            builder.RegisterApiControllers(configuration.webapiAssemblies.ToArray());
 
             // OPTIONAL: Register the Autofac filter provider.
             builder.RegisterWebApiFilterProvider(config);

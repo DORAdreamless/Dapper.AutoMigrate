@@ -90,23 +90,26 @@ namespace Tiantianquan.Common.Repositories
                                                 ",tableName,columnName, columnDescription));
                 }
             }
-
+            ILogger logger = ObjectContainer.Current.Resolve<ILoggerFactory>().Create(typeof(Engine));
             foreach (var sql in ExtraSqls)
             {
-                using(IDbConnection connection = GetDbConnection())
+               
+                using (IDbConnection connection = GetDbConnection())
                 {
+                    
                     try
                     {
                         connection.Execute(sql);
+                        
                     }
                     catch(Exception ex)
                     {
-                        ILogger logger = ObjectContainer.Current.Resolve<ILoggerFactory>().Create(typeof(Engine));
+                       
                         logger.Error(ex.Message + sql,ex);
                     }
                 }
             }
-
+            logger.Info(string.Join("\r\n", ExtraSqls));
         }
 
         public static void AddForeignKey<T1, T2>(Expression<Func<T1, object>> memberExpression1, Expression<Func<T2, object>> memberExpression2)

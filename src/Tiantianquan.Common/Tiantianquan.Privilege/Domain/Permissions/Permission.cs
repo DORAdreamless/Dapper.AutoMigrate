@@ -34,7 +34,7 @@ namespace Tiantianquan.Privilege.Domain
         /// 菜单编码
         /// </summary>
         [Description("菜单编码")]
-        public virtual string NavicationMenuId { get; set; }
+        public virtual string NavigationMenuId { get; set; }
         /// <summary>
         /// 是否授权
         /// </summary>
@@ -45,6 +45,8 @@ namespace Tiantianquan.Privilege.Domain
         /// </summary>
         [Description("授权用户编码")]
         public virtual string CreatedUserId { get; set; }
+
+        
 
     }
 }
