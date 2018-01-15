@@ -10,6 +10,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Tiantianquan.Common.Logging;
 
 namespace Tiantianquan.Common.Repositories
 {
@@ -40,7 +41,10 @@ namespace Tiantianquan.Common.Repositories
 
                 })
                 .CurrentSessionContext<WebSessionContext>()
-                .ExposeConfiguration(cfg => new SchemaUpdate(cfg).Execute(true, true))
+                .ExposeConfiguration(cfg => new SchemaUpdate(cfg).Execute((sql)=> {
+                    ILogger logger = new Tiantianquan.Common.Logging.Log4Net.Log4NetLoggerFactory("log4net.config").Create("NhSessionFactory");
+                    logger.Info(sql);
+                }, true))
                 .BuildConfiguration();
             sessionFactory = config.BuildSessionFactory();
 

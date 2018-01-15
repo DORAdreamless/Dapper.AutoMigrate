@@ -13,7 +13,7 @@ using Tiantianquan.Common.Repositories;
 
 namespace Tiantianquan.Common.Configurations
 {
-   public static partial class ConfigurationExtensions
+    public static partial class ConfigurationExtensions
     {
 
         public static Configuration RegisterRepositoriesAssembly(this Configuration configuration, params Assembly[] assemblies)
@@ -26,19 +26,34 @@ namespace Tiantianquan.Common.Configurations
             configuration.RegisterRepositoriesAssembly(assemblies);
             string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings[connectionSection].ConnectionString;
             string providerName = System.Configuration.ConfigurationManager.ConnectionStrings[connectionSection].ProviderName;
-            var configurer = MsSqlConfiguration.MsSql2008.ConnectionString(connectionString)
-              .AdoNetBatchSize(500)
-              .Dialect<NHibernate.Dialect.MsSql2008Dialect>()
-              .FormatSql()
-              .ShowSql()
-              .UseOuterJoin();
+            IPersistenceConfigurer configurer = null;
+            switch (providerName)
+            {
+                case "System.Data.SqlClient":
+                    configurer = MsSqlConfiguration.MsSql2008.ConnectionString(connectionString)
+                                  .AdoNetBatchSize(500)
+                                  .Dialect<NHibernate.Dialect.MsSql2008Dialect>()
+                                  .FormatSql()
+                                  .ShowSql()
+                                  .UseOuterJoin();
+                    break;
+                case "MySql.Data.MySqlClient":
+                    configurer = MySQLConfiguration.Standard.ConnectionString(connectionString)
+                                  .AdoNetBatchSize(500)
+                                  .Dialect<NHibernate.Dialect.MySQL55InnoDBDialect>()
+                                  .FormatSql()
+                                  .ShowSql()
+                                  .UseOuterJoin();
+                    break;
+            }
+
             NhSessionFactory.Instance(configurer, configuration.repositoryAssemblies.ToArray());
             Engine.RegisterDataBase(providerName, connectionString);
-           
+
 
             foreach (Assembly assembly in configuration.repositoryAssemblies)
             {
-               Type[] types = assembly.GetTypes().Where(item => typeof(IRepository).IsAssignableFrom(item) && !item.IsAbstract).ToArray();
+                Type[] types = assembly.GetTypes().Where(item => typeof(IRepository).IsAssignableFrom(item) && !item.IsAbstract).ToArray();
                 ((AutofacObjectContainer)ObjectContainer.Current).ContainerBuilder.RegisterTypes(types).AsImplementedInterfaces().SingleInstance();
             }
             return configuration;
@@ -50,7 +65,7 @@ namespace Tiantianquan.Common.Configurations
         //}
         public static Configuration RunAsync(this Configuration configuration, params Assembly[] assemblies)
         {
-      
+
             Engine.RunSync(configuration.repositoryAssemblies.ToArray());
             return configuration;
         }

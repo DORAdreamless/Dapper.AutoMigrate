@@ -13,8 +13,9 @@ namespace Tiantianquan.Common.Repositories
         public BaseClassMap()
         {
             this.Id(item => item.Id).GeneratedBy.Assigned();
-            this.Map(item => item.CreatedAt).Default("GETDATE()").Index("IDX_"+typeof(TEntity).Name+"_CreatedAt");
-            this.Map(item => item.UpdatedAt).Default("GETDATE()").Update();
+            this.Map(item => item.CreatedAt).Index("IDX_"+typeof(TEntity).Name+"_CreatedAt");
+            this.Map(item => item.UpdatedAt);
+            this.Map(item => item.SequenceNo);
         }
     }
 

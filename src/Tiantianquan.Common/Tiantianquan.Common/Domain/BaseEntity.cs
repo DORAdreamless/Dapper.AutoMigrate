@@ -28,7 +28,11 @@ namespace Tiantianquan.Common.Domain
         /// </summary>
         [Description("更新时间")]
         public virtual DateTime UpdatedAt { get; set; }
-
+        /// <summary>
+        /// 排序号
+        /// </summary>
+        [Description("排序号")]
+        public virtual long SequenceNo { get; set; }
         public BaseEntity()
         {
             this.CreatedAt = DateTime.UtcNow;
